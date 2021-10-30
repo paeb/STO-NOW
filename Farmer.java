@@ -25,10 +25,6 @@ public class Farmer extends Actor
     private boolean isVisible = true;
     private double scaleFactor = 1.82278;
     private String lastPos = "front";
-
-    //fields for marketplace/shop
-    //data is unique to each farmer
-    //this way we don't have to make the variables static
     
     private double currency = 200; //start with 200 dollars
     private int numPickaxe = 1; //start with 1 pickaxe
