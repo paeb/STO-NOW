@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class Farm extends World
 {
-
-    //do NOT use static, it saves the variables after you reset
     
     //farmer actor variables
     protected int farmerX = 282; //x-coordinate of farmer's starting position
@@ -19,8 +17,6 @@ public class Farm extends World
     
     //pickaxe variables
     protected int angle = 0; //angle of the pickaxe
-    //protected boolean pickaxeHasReachedLowerLimit = false; //lower bound for the swing of the pickaxes
-    //protected boolean pickaxeHasReachedHigherLimit = false; //upper bound for the pickaxe swing
     protected boolean pickaxeRotatingLow = true; //if the pickaxe is currently rotating down
     protected boolean pickaxeRotatingHigh = false; //if the pickaxe is currently rotating up
     protected final int leftLowAngleBound = -70;
@@ -72,11 +68,6 @@ public class Farm extends World
     protected Slot slot5 = new Slot();
     protected Slot slot6 = new Slot();
     protected Slot slot7 = new Slot();
-    //protected Slot slot8 = new Slot();
-    //protected Slot slot9 = new Slot();
-    //protected Slot slot10 = new Slot();
-    //protected Slot slot11 = new Slot();
-    //protected Slot[] slotArray = {slot1,slot2,slot3,slot4,slot5,slot6,slot7,slot8,slot9,slot10,slot11};
     protected Slot[] slotArray = {slot1,slot2,slot3,slot4,slot5,slot6,slot7};
     
     protected GreenfootImage[] slotB_img = new GreenfootImage[7];
@@ -90,11 +81,6 @@ public class Farm extends World
     protected int round = 1; 
     protected int currencyThreshold1 = 300;
     
-    //account for the time elapsed in the shop
-    //public long timeDifference;
-    //public long startTime1 = 0;
-    //public long endTime1 = 0;
-    
     //timer
     protected long totalSecondsElapsed;
     protected long secondsElapsed;
@@ -103,11 +89,8 @@ public class Farm extends World
     protected boolean onCritPhase = false;
 
     protected int roundNumber = 1;
-    //protected int initialPhaseTime = 10;
-    //protected int criticalPhaseTime = 60;
 
     //make an array of the Tiles (size of maximum Tiles) and pass in the Tiles
-    //add a x and y field within the Tile class that can be accessed
     protected List<Tile> infertileTileList = new ArrayList<Tile>();
     
     protected long timeDelay1_start = 0;
