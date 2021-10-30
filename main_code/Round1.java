@@ -13,7 +13,7 @@ public class Round1 extends Farm
     {
         // Create a new world with 565x435 cells with a cell size of 1x1 pixels.
         super();
-        timer = new Timer(); //for some reason, this doesn't work in the prepare method
+        timer = new Timer();
         prepare();
     }
 
@@ -37,27 +37,17 @@ public class Round1 extends Farm
         //tile + pickaxe interaction
         pickaxeTile();
 
-        //raising/lowering the top banner for the time
-        //adjustTopBanner();
-        //raise/lower the bottom banner for the inventory
-        //adjustBottomBanner();
-
         //press m to show/hide shop
         adjustShopTransparency();
 
         if (Greenfoot.mouseClicked(shopButton)) {
-            //this.startTime1 = timer.getTotalSeconds();
             Greenfoot.setWorld(new Shop1(this));
         }
-
-        //show the inventory (press i)
-        //adjustInventoryTransparency();
 
         //handles the countdown timer
         countdownTimer();
 
         //handles planting seeds (press key 2)
-        //actual wheat spawning is handled by the Tile Class
         equipWheatSeed();
         
         plantWheatSeeds();
@@ -70,16 +60,12 @@ public class Round1 extends Farm
         
         //changing the inventory colors based on whether the tools are equipped
         adjustSlotColors();
-        
-        //this.showText(infertileTileList1.size() + "", 250, 100);
 
         //set the previous sprite position of farmer
         prevPos = farmer.getLastPos();
     }    
 
     private void countdownTimer() {
-        //timeDifference = endTime1 - startTime1;
-        //long totalSecondsElapsed = timer.getTotalSeconds() - timeDifference;
         totalSecondsElapsed = timer.getTotalSeconds();
         //time difference accounts for the time elapsed upon switching to the shop
         secondsElapsed = timer.getSeconds();
@@ -138,7 +124,6 @@ public class Round1 extends Farm
         if (timer.finishedRound1()) { //if the user's time is over
             if (topHeader.bannerLowered()) {
                 img = new GreenfootImage(500, 100);
-                //img.setColor(Color.CYAN);
                 img.setFont(new Font("Arial", false, false , 30));
                 img.setTransparency(255);
 
@@ -153,12 +138,9 @@ public class Round1 extends Farm
                     }
                     
                     if (timer.getAbsoluteSeconds() - timeDelay1_start >= Settings.timeDelay1_threshold) { //enough time has passed
-                        //this.showText("yay",100,217);
                         Greenfoot.setWorld(new Round2(this));
                     }
-                    
-                    //this.showText("Interval "+(timer.getAbsoluteSeconds()-timeDelay1_start),100,217);
-                    //this.showText("StartTime:"+timeDelay1_start+"",100,250);
+                  
                 }
                 else {
                     img.setColor(Color.RED);
@@ -170,7 +152,6 @@ public class Round1 extends Farm
                     }
                     
                     if (timer.getAbsoluteSeconds() - timeDelay1_start >= Settings.timeDelay1_threshold) { //enough time has passed
-                        //this.showText("yay",100,217);
                         Greenfoot.setWorld(new Intro());
                     }
                 }
@@ -447,8 +428,6 @@ public class Round1 extends Farm
                         farmer.setNumWheatSeeds(farmer.getNumWheatSeeds() - 1);
                     }
                 }
-                //we find the nearest tile in Farm and set behavior. We cannot manage each health bar and tile here
-                //after this
 
                 clicked = false;
             }
@@ -602,8 +581,6 @@ public class Round1 extends Farm
         }
         addObject(farmer,farmerX,farmerY); //otherwise, just add the farmer with data
 
-        //int i = 1;
-        //int xCoordinate = 45;
         int xCoordinate = 142;
         
         for (int s = 0; s < slotB_img.length; s++) { //set the blue and green image arrays
