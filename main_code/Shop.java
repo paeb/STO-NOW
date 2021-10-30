@@ -11,12 +11,10 @@ public class Shop extends World
      * Constructor for objects of class Shop.
      * 
      */
-    //have starting amounts for the user
 
     protected int cropAmt; 
     protected int moneyAmt;
-    //private static double numPickaxe = 0;
-    //private static double currency = 100; //starting currency for the farmer
+    
     protected Farmer farmer = null;
     //cost in dollars
     protected double pickaxeCost = 100;
