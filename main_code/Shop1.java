@@ -11,12 +11,10 @@ public class Shop1 extends Shop
      * Constructor for objects of class CopyOfShop.
      * 
      */
-    //have starting amounts for the user
 
     private int cropAmt; 
     private int moneyAmt;
-    //private static double numPickaxe = 0;
-    //private static double currency = 100; //starting currency for the farmer
+
     private Farmer farmer = null;
     //cost in dollars
     private double pickaxeCost = 100;
@@ -90,8 +88,6 @@ public class Shop1 extends Shop
     
     public void act() {
         writeText(); //with the greenfootImage, it occupies a lot of space so may interfere with other buttons
-        //FarmButton farmButton = getObjects(FarmButton.class).get(0);
-        //start with buying the pickaxe
         double currency = farmer.getCurrency();
         
         if (Greenfoot.mouseClicked(buyButtonPickaxe)) {
@@ -137,8 +133,6 @@ public class Shop1 extends Shop
         }
     }    
     private void writeText() {
-        //this.showText("Currency: " + farmer.getCurrency(), 282, 30); //show Currency
-
         createText(currencyText, currencyImg, "Currency: $" + farmer.getCurrency(), 25, false, false);
         this.addObject(currencyText, 300, 35);
         
