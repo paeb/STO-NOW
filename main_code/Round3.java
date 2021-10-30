@@ -15,7 +15,7 @@ public class Round3 extends Farm
     {
         // Create a new world with 565x435 cells with a cell size of 1x1 pixels.
         super();
-        timer = new Timer(); //for some reason, this doesn't work in the prepare method
+        timer = new Timer();
         prepare();
     }
 
@@ -90,7 +90,6 @@ public class Round3 extends Farm
         countdownTimer();
 
         //handles planting seeds (press key 2)
-        //actual wheat spawning is handled by the Tile Class
         equipWheatSeed();
 
         plantWheatSeeds();
@@ -109,10 +108,7 @@ public class Round3 extends Farm
     }    
 
     private void countdownTimer() {
-        //timeDifference = endTime1 - startTime1;
-        //long totalSecondsElapsed = timer.getTotalSeconds() - timeDifference;
         totalSecondsElapsed = timer.getTotalSeconds();
-        //time difference accounts for the time elapsed upon switching to the shop
         secondsElapsed = timer.getSeconds();
         minutesElapsed = timer.getMinutes();
 
@@ -125,7 +121,6 @@ public class Round3 extends Farm
             img.setFont(new Font("Arial", false, false , 30));
             img.setTransparency(255);
 
-            //this.showText("Task: Buy Materials", 450, 217);
             if (secondsElapsed < 10) {//from :01 to:09
                 img.drawString("ROUND 3" + "     " + "INIT PHASE-" + minutesElapsed + ":" + "0" + secondsElapsed, 0, 50);
             }
@@ -138,14 +133,12 @@ public class Round3 extends Farm
         }
 
         if (onCritPhase) {
-            //initialInsects();
             if (topHeader.bannerLowered()) {
                 img = new GreenfootImage(500, 100);
                 img.setColor(Color.RED);
                 img.setFont(new Font("Arial", false, false , 30));
                 img.setTransparency(255);
 
-                //this.showText("Task: Buy Materials", 450, 217);
                 if (secondsElapsed < 10) {//from :01 to:09
                     img.drawString("ROUND 3" + "     " + "CRIT PHASE-" + minutesElapsed + ":" + "0" + secondsElapsed, 0, 50);
                 }
@@ -585,8 +578,6 @@ public class Round3 extends Farm
                         farmer.setNumWheatSeeds(farmer.getNumWheatSeeds() - 1);
                     }
                 }
-                //we find the nearest tile in Farm and set behavior. We cannot manage each health bar and tile here
-                //after this
 
                 clicked = false;
             }
@@ -627,7 +618,6 @@ public class Round3 extends Farm
                     if (!nearestTile.hasSprayedPesticide() && distFromFarmer < 50) { //if it is unsprayed and close enough
                         nearestTile.sprayPesticide(); //spawn the wheat and health bar
                         farmer.setNumPesticide(farmer.getNumPesticide() - 1);
-                        //this.showText(farmer.getNumPesticide() + "", 100, 217);
                     }
                 }
                 clicked = false;
@@ -637,7 +627,6 @@ public class Round3 extends Farm
 
     private void activateDrone() {
         if (farmer.getNumDrone() > 0 && droneEquipped) {
-            //droneImg.setTransparency(255); //show drone
 
             if (droneEnroute) { //if the drone is already moving to a certain crop
                 //then we increment distance and also check if it has arrived
@@ -658,12 +647,8 @@ public class Round3 extends Farm
                     droneEnroute = false;
                     returningToCenter = false;
                 }
-                else { //increment the distance again because we are still too far
-                    //int droneX = drone.getX();
-                    //int droneY = drone.getY();
-
-                    newDroneX = newDroneX + xIncrement; //we need a seperate variable to keep track because
-                    //if we just round dronePos + Increment then it's prob a decimal and will be inaccurate
+                else {
+                    newDroneX = newDroneX + xIncrement;
                     newDroneY = newDroneY + yIncrement;
 
                     drone.setLocation((int)(Math.round(newDroneX)), (int)(Math.round(newDroneY)));
@@ -751,7 +736,6 @@ public class Round3 extends Farm
 
     private void activateImprovedDrone() {
         if (farmer.getNumImprovedDrone() > 0 && improvedDroneEquipped) {
-            //droneImg.setTransparency(255); //show drone
 
             if (improvedDroneEnroute) { //if the drone is already moving to a certain crop
                 //then we increment distance and also check if it has arrived
@@ -772,16 +756,8 @@ public class Round3 extends Farm
                     improvedDroneEnroute = false;
                     returningToCenter2 = false;
                 }
-                else { //increment the distance again because we are still too far
-                    //int droneX = improvedDrone.getX();
-                    //int droneY = improvedDrone.getY();
-
-                    //newImprovedDroneX = droneX + xIncrement2; //we need a seperate variable to keep track because
-                    //if we just round dronePos + Increment then it's prob a decimal and will be inaccurate
-                    //newImprovedDroneY = droneY + yIncrement2;
-
-                    newImprovedDroneX = newImprovedDroneX + xIncrement2; //we need a seperate variable to keep track because
-                    //if we just round dronePos + Increment then it's prob a decimal and will be inaccurate
+                else { 
+                    newImprovedDroneX = newImprovedDroneX + xIncrement2;
                     newImprovedDroneY = newImprovedDroneY + yIncrement2;
 
                     improvedDrone.setLocation((int)(Math.round(newImprovedDroneX)), (int)(Math.round(newImprovedDroneY)));
@@ -870,12 +846,7 @@ public class Round3 extends Farm
 
     private void activateRobot() {
         if (farmer.getNumRobot() > 0 && robotEquipped) {
-            //this.showText(farmer.getNumWheatSeeds()+":Seed",100,217);
-            //this.showText(farmer.getNumInfectedWheat()+":Wheat",200,217);
-            //this.showText("activated",100,217);
             if (robotEnroute) {
-                //this.showText("here",300,317);
-                //double dist = distance(robot.getX(), robotXTarget, robot.getY(), robotYTarget);
                 int robotX = robot.getX();
                 int robotY = robot.getY();
                 boolean robotArrived = false;
@@ -949,7 +920,6 @@ public class Round3 extends Farm
                         robotNearestWheat = wheat;
                         robotNearestTile = wheatTile;
                     }
-                    //this.showText("uh oh",150,217);
                 }
 
                 if (robotNearestWheat == null) { //if we can't go to a wheat
@@ -966,31 +936,22 @@ public class Round3 extends Farm
                 }
 
                 //if there is an available tile is the first priority
-                //and if there is no available wheat, if there is a 
 
                 boolean canCollectOrPlant = robotNearestWheat != null || (robotNearestTile != null && farmer.getNumWheatSeeds() > 0);
-
-                //this.showText(canCollectOrPlant+"",300,217);
 
                 if (canCollectOrPlant) {
                     robotNearestTileX = robotNearestTile.getX();
                     robotNearestTileY = robotNearestTile.getY();
-                    //this.showText(robotNearestTileX+"",214,217);
-                    //this.showText(robotNearestTileY+"",214,250);
-                    //this.showText("cancollplant",400,300);
                 } 
                 else { //cannot go to any tiles because they have a seed or they don't have a wheat or no seeds left
                     robotNearestTileX = 265;
                     robotNearestTileY = 217;
-                    //this.showText("goingbacktocenter",400,400);
                     robotReturningToCenter = true;
                 }
 
                 int robotX = robot.getX();
                 int robotY = robot.getY();
 
-                //need to set the x and y targets to go to
-                //(the x is not the same as the tiles, but rather the position of the space between them)
                 if (!robotReturningToCenter) { //not going to the center
                     int tileX = robotNearestTileX;
                     if (tileX == 20) { //1st column of tiles
@@ -1039,15 +1000,7 @@ public class Round3 extends Farm
                     robotYTarget = robotNearestTileY;
                 }
 
-                //the problem here is that if our next target is in the same row but different column,
-                //then this says that we are close enough vertically so jump horizontally
-                //but, that would mean moving through the columns which shouldn't do
-                //so if the target is in another row, we have to first go back to the center height
-
                 if (!robotReturningToCenter && Math.abs(robotY - 217) > robotYThreshold && Math.abs(robotXTarget - robotX) > 35){ 
-                    //robot is NOT returning to center and new target is in another column,
-                    //return to center first
-
                     robotNearestTileX = robotX;
                     robotNearestTileY = 217;
                     robotXTarget = robotNearestTileX;
@@ -1061,26 +1014,18 @@ public class Round3 extends Farm
                 robotXIncrement = xDiff / robotSpeed;
                 robotYIncrement = yDiff / robotSpeed;
 
-                //this.showText(robotYTarget+"",400,150);
-                //this.showText(robotY+"",400,100);
-                //this.showText(robotYIncrement+"",400,220);
-
                 if (Math.abs(robotY-217) < robotYThreshold) { //robot is close enough to the center height
                     //travel horizontally first
                     robotTravel = "horizontal";
-                    //this.showText("incorrect",100,250);
-                    //this.showText("horizontal",340,250);
                 }
                 else { //robot is not close enough to the center height
                     //travel vertically first
                     robotTravel = "vertical";
-                    //this.showText("vertical",340,250);
                 }
 
                 if (robotTravel.equals("horizontal")) {
                     newRobotX = robotX + robotXIncrement;
                     newRobotY = robotY;
-                    //this.showText("incorrect2",100,400);
                 }
                 else if (robotTravel.equals("vertical")) {
                     newRobotX = robotX;
@@ -1101,14 +1046,7 @@ public class Round3 extends Farm
             improvedDroneControl();
 
             robotControl();
-            //this.showText(x + "", 100, 217);
-            //this.showText(y + "", 200, 217);
-            //this.showText(Greenfoot.mouseDragged(sliderDroneSpeed) +"", 300,217);
-            //this.showText(Greenfoot.mouseDragEnded(sliderDroneSpeed) +"", 400,217);
-            //this.showText(farmer.getCurrency() +":Currency", 400,217);
-            //this.showText("DroneSpeed:"+droneSpeed,100,217);
-            //this.showText(sliderDroneResource.getY() +":Ypos",200,300);
-
+            
             int bankAmt = (int)(farmer.getCurrency());
             createText(bankText, bankImg, "Bank: $"+bankAmt, Color.CYAN, 25, true, false);
             this.addObject(bankText,462,358);
@@ -1141,9 +1079,6 @@ public class Round3 extends Farm
             newPosSliderDroneSpeed = sliderDroneSpeed.getY();
             int yDiff = newPosSliderDroneSpeed - lastPosSliderDroneSpeed; 
             //If we raise the slider, then the y coordinate decreases, so negative yDiff
-            //lastPosSliderDroneSpeed = newPosSliderDroneSpeed; //don't reset it yet
-
-            //droneCost += yDiff * costFactor;
             droneSpeedCost = yDiff * costFactor;
         }
         else if (Greenfoot.mouseDragged(sliderDroneResource)) {
@@ -1165,9 +1100,6 @@ public class Round3 extends Farm
         double percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
         int newAmt = (int)(percentage * (higherAmt - lowerAmt) + lowerAmt);
 
-        //this.showText("newAmt"+newAmt,300,400);
-
-        //this.showText(newAmt+": Amt Changed",100,300);
         int pesticideAmt = farmer.getNumPesticide();
         int newPesticideAmt = pesticideAmt + newAmt;
 
@@ -1200,7 +1132,6 @@ public class Round3 extends Farm
         }
 
         //if the cost is negative and the magnitude is more than we currently have, show a red message
-        //OR if we're trying to sell more than we have
 
         if ((droneCost < 0 && Math.abs(droneCost) > farmer.getCurrency()) || excessivePesticideSold) { //we lose money and the cost is 
             //greater than the farmer's current currency
@@ -1216,7 +1147,6 @@ public class Round3 extends Farm
         this.addObject(droneCostText, 495, 108);
 
         if (Greenfoot.mouseClicked(yesButtonDrone)) {
-            //this.showText("yay",50,50);
             if (!excessiveCost) { //only if they can afford it
 
                 //ADJUST SPEED
@@ -1227,16 +1157,14 @@ public class Round3 extends Farm
                 double higherSpeed = 180; //slowest
 
                 //use percentages to correlate the y Pos with speed val
-                percentage = (sliderY - lowerVal) / (higherVal - lowerVal); //maybe 1 minus this
-                //this.showText("SliderY: "+(int)sliderY,300,250);
-                //this.showText("Percentage:"+(int)percentage,300,217);
+                percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
                 int newSpeed = (int)(percentage * (higherSpeed - lowerSpeed) + lowerSpeed);
 
                 droneSpeed = newSpeed;
 
                 lastPosSliderDroneSpeed = sliderDroneSpeed.getY(); //set the new pos as the most recent saved pos
 
-                //ADJUST RESOURCE AMT (different because we are adding/subtracting amt, not setting the absolute
+                //ADJUST RESOURCE AMT (different because we are adding/subtracting amt, not setting the absolute)
                 sliderY = sliderDroneResource.getY();
                 lowerAmt = 20; //most
                 higherAmt = -20; //least
@@ -1245,15 +1173,10 @@ public class Round3 extends Farm
                 percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
                 newAmt = (int)(percentage * (higherAmt - lowerAmt) + lowerAmt);
 
-                //this.showText(newAmt+": Amt Changed",100,300);
-
                 pesticideAmt = farmer.getNumPesticide();
                 newPesticideAmt = pesticideAmt + newAmt;
 
                 farmer.setNumPesticide(newPesticideAmt);
-
-                //this.showText(pesticideAmt+": OldAmt",100,217);
-                //this.showText(farmer.getNumPesticide()+": NewAmt",300,217);
 
                 int currency = (int)(farmer.getCurrency());
                 currency += droneCost; //if it is negative, then deducts money
@@ -1302,9 +1225,6 @@ public class Round3 extends Farm
             newPosSliderImprovedDroneSpeed = sliderImprovedDroneSpeed.getY();
             int yDiff = newPosSliderImprovedDroneSpeed - lastPosSliderImprovedDroneSpeed; 
             //If we raise the slider, then the y coordinate decreases, so negative yDiff
-            //lastPosSliderDroneSpeed = newPosSliderDroneSpeed; //don't reset it yet
-
-            //droneCost += yDiff * costFactor;
             improvedDroneSpeedCost = yDiff * costFactor;
         }
         else if (Greenfoot.mouseDragged(sliderImprovedDroneResource)) {
@@ -1326,9 +1246,6 @@ public class Round3 extends Farm
         double percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
         int newAmt = (int)(percentage * (higherAmt - lowerAmt) + lowerAmt);
 
-        //this.showText("newAmt"+newAmt,300,400);
-
-        //this.showText(newAmt+": Amt Changed",100,300);
         int fertilizerAmt = farmer.getNumFertilizer();
         int newFertilizerAmt = fertilizerAmt + newAmt;
 
@@ -1361,7 +1278,6 @@ public class Round3 extends Farm
         }
 
         //if the cost is negative and the magnitude is more than we currently have, show a red message
-        //OR if we're trying to sell more than we have
 
         if ((improvedDroneCost < 0 && Math.abs(improvedDroneCost) > farmer.getCurrency()) || excessiveFertilizerSold) { //we lose money and the cost is 
             //greater than the farmer's current currency
@@ -1377,7 +1293,6 @@ public class Round3 extends Farm
         this.addObject(improvedDroneCostText, 495, 198);
 
         if (Greenfoot.mouseClicked(yesButtonImprovedDrone)) {
-            //this.showText("yay",50,50);
             if (!excessiveCost) { //only if they can afford it
 
                 //ADJUST SPEED
@@ -1389,8 +1304,6 @@ public class Round3 extends Farm
 
                 //use percentages to correlate the y Pos with speed val
                 percentage = (sliderY - lowerVal) / (higherVal - lowerVal); //maybe 1 minus this
-                //this.showText("SliderY: "+(int)sliderY,300,250);
-                //this.showText("Percentage:"+(int)percentage,300,217);
                 int newSpeed = (int)(percentage * (higherSpeed - lowerSpeed) + lowerSpeed);
 
                 droneSpeed2 = newSpeed;
@@ -1406,15 +1319,10 @@ public class Round3 extends Farm
                 percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
                 newAmt = (int)(percentage * (higherAmt - lowerAmt) + lowerAmt);
 
-                //this.showText(newAmt+": Amt Changed",100,300);
-
                 fertilizerAmt = farmer.getNumFertilizer();
                 newFertilizerAmt = fertilizerAmt + newAmt;
 
                 farmer.setNumFertilizer(newFertilizerAmt);
-
-                //this.showText(pesticideAmt+": OldAmt",100,217);
-                //this.showText(farmer.getNumPesticide()+": NewAmt",300,217);
 
                 int currency = (int)(farmer.getCurrency());
                 currency += improvedDroneCost; //if it is negative, then deducts money
@@ -1463,9 +1371,6 @@ public class Round3 extends Farm
             newPosSliderRobotSpeed = sliderRobotSpeed.getY();
             int yDiff = newPosSliderRobotSpeed - lastPosSliderRobotSpeed; 
             //If we raise the slider, then the y coordinate decreases, so negative yDiff
-            //lastPosSliderDroneSpeed = newPosSliderDroneSpeed; //don't reset it yet
-
-            //droneCost += yDiff * costFactor;
             robotSpeedCost = yDiff * costFactor;
         }
         else if (Greenfoot.mouseDragged(sliderRobotResource)) {
@@ -1487,9 +1392,6 @@ public class Round3 extends Farm
         double percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
         int newAmt = (int)(percentage * (higherAmt - lowerAmt) + lowerAmt);
 
-        //this.showText("newAmt"+newAmt,300,400);
-
-        //this.showText(newAmt+": Amt Changed",100,300);
         int wheatSeedAmt = farmer.getNumWheatSeeds();
         int newWheatSeedAmt = wheatSeedAmt + newAmt;
 
@@ -1522,7 +1424,6 @@ public class Round3 extends Farm
         }
 
         //if the cost is negative and the magnitude is more than we currently have, show a red message
-        //OR if we're trying to sell more than we have
 
         if ((robotCost < 0 && Math.abs(robotCost) > farmer.getCurrency()) || excessiveWheatSeedSold) { //we lose money and the cost is 
             //greater than the farmer's current currency
@@ -1538,7 +1439,6 @@ public class Round3 extends Farm
         this.addObject(robotCostText, 495, 287);
 
         if (Greenfoot.mouseClicked(yesButtonRobot)) {
-            //this.showText("yay",50,50);
             if (!excessiveCost) { //only if they can afford it
 
                 //ADJUST SPEED
@@ -1549,9 +1449,7 @@ public class Round3 extends Farm
                 double higherSpeed = 180; //slowest
 
                 //use percentages to correlate the y Pos with speed val
-                percentage = (sliderY - lowerVal) / (higherVal - lowerVal); //maybe 1 minus this
-                //this.showText("SliderY: "+(int)sliderY,300,250);
-                //this.showText("Percentage:"+(int)percentage,300,217);
+                percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
                 int newSpeed = (int)(percentage * (higherSpeed - lowerSpeed) + lowerSpeed);
 
                 robotSpeed = newSpeed;
@@ -1567,15 +1465,10 @@ public class Round3 extends Farm
                 percentage = (sliderY - lowerVal) / (higherVal - lowerVal);
                 newAmt = (int)(percentage * (higherAmt - lowerAmt) + lowerAmt);
 
-                //this.showText(newAmt+": Amt Changed",100,300);
-
                 wheatSeedAmt = farmer.getNumWheatSeeds();
                 newWheatSeedAmt = wheatSeedAmt + newAmt;
 
                 farmer.setNumWheatSeeds(newWheatSeedAmt);
-
-                //this.showText(pesticideAmt+": OldAmt",100,217);
-                //this.showText(farmer.getNumPesticide()+": NewAmt",300,217);
 
                 int currency = (int)(farmer.getCurrency());
                 currency += robotCost; //if it is negative, then deducts money
@@ -1617,7 +1510,6 @@ public class Round3 extends Farm
     public void createText(ShopText text, GreenfootImage image, String phrase, Color color, int size, boolean bold, boolean italic) {
         image = new GreenfootImage(200,30);
         image.setColor(color);
-        //image.fill();
         image.setFont(new Font("Arial", bold, italic, size));
         image.drawString(phrase, 0, 25);
         image.setTransparency(255);
@@ -1804,7 +1696,6 @@ public class Round3 extends Farm
 
                     addObject(newTile, tileX, tileY); //maximum overlap
                     addObject(newTileBorder, tileX, tileY);
-                    //addObject (new Tile(), 20 + j * 105, initY + i * 36); //maximum overlap
                 }
             }   
         }
@@ -1947,7 +1838,6 @@ public class Round3 extends Farm
         addObject(controller,283,213); //283,198
 
         shopButton = new ShopButton();
-        //shopButton.getImage().setTransparency(255);
         shopButton.getImage().scale(35,35);
         addObject(shopButton, 17, 17);
 
