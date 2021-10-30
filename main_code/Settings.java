@@ -12,7 +12,7 @@ public class Settings extends Actor
     
     public static final int currencyThreshold1 = 300;
     public static final int currencyThreshold2 = 600;
-    public static final int currencyThreshold3 = 900; //900
+    public static final int currencyThreshold3 = 900;
     
     //in seconds
     public static final int initialPhaseTime1 = 30;
