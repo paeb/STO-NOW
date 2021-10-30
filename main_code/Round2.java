@@ -15,7 +15,7 @@ public class Round2 extends Farm
     {
         // Create a new world with 565x435 cells with a cell size of 1x1 pixels.
         super();
-        timer = new Timer(); //for some reason, this doesn't work in the prepare method
+        timer = new Timer();
         prepare();
     }
 
@@ -76,7 +76,6 @@ public class Round2 extends Farm
         countdownTimer();
 
         //handles planting seeds (press key 2)
-        //actual wheat spawning is handled by the Tile Class
         equipWheatSeed();
         
         plantWheatSeeds();
@@ -95,10 +94,7 @@ public class Round2 extends Farm
     }    
 
     private void countdownTimer() {
-        //timeDifference = endTime1 - startTime1;
-        //long totalSecondsElapsed = timer.getTotalSeconds() - timeDifference;
         totalSecondsElapsed = timer.getTotalSeconds();
-        //time difference accounts for the time elapsed upon switching to the shop
         secondsElapsed = timer.getSeconds();
         minutesElapsed = timer.getMinutes();
 
@@ -111,7 +107,6 @@ public class Round2 extends Farm
             img.setFont(new Font("Arial", false, false , 30));
             img.setTransparency(255);
 
-            //this.showText("Task: Buy Materials", 450, 217);
             if (secondsElapsed < 10) {//from :01 to:09
                 img.drawString("ROUND 2" + "     " + "INIT PHASE-" + minutesElapsed + ":" + "0" + secondsElapsed, 0, 50);
             }
@@ -131,7 +126,6 @@ public class Round2 extends Farm
                 img.setFont(new Font("Arial", false, false , 30));
                 img.setTransparency(255);
 
-                //this.showText("Task: Buy Materials", 450, 217);
                 if (secondsElapsed < 10) {//from :01 to:09
                     img.drawString("ROUND 2" + "     " + "CRIT PHASE-" + minutesElapsed + ":" + "0" + secondsElapsed, 0, 50);
                 }
@@ -476,9 +470,6 @@ public class Round2 extends Farm
                         farmer.setNumWheatSeeds(farmer.getNumWheatSeeds() - 1);
                     }
                 }
-                //we find the nearest tile in Farm and set behavior. We cannot manage each health bar and tile here
-                //after this
-
                 clicked = false;
             }
         }
@@ -518,7 +509,6 @@ public class Round2 extends Farm
                     if (!nearestTile.hasSprayedPesticide() && distFromFarmer < 50) { //if it is unsprayed and close enough
                         nearestTile.sprayPesticide(); //spawn the wheat and health bar
                         farmer.setNumPesticide(farmer.getNumPesticide() - 1);
-                        //this.showText(farmer.getNumPesticide() + "", 100, 217);
                     }
                 }
                 clicked = false;
@@ -528,13 +518,11 @@ public class Round2 extends Farm
 
     private void activateDrone() {
         if (farmer.getNumDrone() > 0 && droneEquipped) {
-            //droneImg.setTransparency(255); //show drone
 
             if (droneEnroute) { //if the drone is already moving to a certain crop
                 //then we increment distance and also check if it has arrived
                 double dist = distance(drone.getX(), nearestCropX, drone.getY(), nearestCropY);
 
-                //this.showText((int)dist + "", 94,217);
                 if (!returningToCenter && dist < 15) { //if it has arrived, then simply apply pesticide and set enroute to false
 
                     if (!nearestTile.hasSprayedPesticide() && nearestTile.getFertile()) { //if it is unsprayed and close enough
@@ -551,16 +539,7 @@ public class Round2 extends Farm
                     returningToCenter = false;
                 }
                 else { //increment the distance again because we are still too far
-                    /**
-                    int droneX = drone.getX();
-                    int droneY = drone.getY();
-                    
-                    newDroneX = droneX + xIncrement; //we need a seperate variable to keep track because
-                    //if we just round dronePos + Increment then it's prob a decimal and will be inaccurate
-                    newDroneY = droneY + yIncrement;
-                    */
-                    newDroneX = newDroneX + xIncrement; //we need a seperate variable to keep track because
-                    //if we just round dronePos + Increment then it's prob a decimal and will be inaccurate
+                    newDroneX = newDroneX + xIncrement;
                     newDroneY = newDroneY + yIncrement;
 
                     drone.setLocation((int)(Math.round(newDroneX)), (int)(Math.round(newDroneY)));
