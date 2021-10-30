@@ -31,8 +31,6 @@ public class Shop3_1 extends Shop
     
     public void act() {
         writeText(); //with the greenfootImage, it occupies a lot of space so may interfere with other buttons
-        //FarmButton farmButton = getObjects(FarmButton.class).get(0);
-        //start with buying the pickaxe
         double currency = farmer.getCurrency();
         
         if (Greenfoot.mouseClicked(buyButtonPickaxe)) {
@@ -82,11 +80,7 @@ public class Shop3_1 extends Shop
         }
     }    
     private void writeText() {
-        //this.showText("Currency: " + farmer.getCurrency(), 282, 30); //show Currency
 
-        //createText(currencyText, currencyImg, "Currency: $" + farmer.getCurrency(), 25, false, false);
-        //this.addObject(currencyText, 300, 35);
-        
         createCurrencyText(currencyText, currencyImg, "Currency: $" + farmer.getCurrency(), 25, false, false);
         this.addObject(currencyText, 325, 35);
         
