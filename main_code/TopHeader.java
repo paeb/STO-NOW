@@ -13,8 +13,6 @@ public class TopHeader extends MapElement
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private GreenfootImage image = null;
-    //private int yLength = 1;
-    //private int yPos = 0;
     private int yLength = 37;
     private int yPos = 18;
     private boolean completed = false;
