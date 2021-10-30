@@ -95,7 +95,7 @@ public class Timer extends Actor
         totalSecondsElapsed = (System.currentTimeMillis() - startTime) / 1000; //total seconds that have passed
         //since the last start time
         
-        countdownTimer(); //this was previously at the bottom of this act() method
+        countdownTimer();
 
         displayTime = phaseTime - totalSecondsElapsed; //for display purposes, to show
         //the time as a countdown from the total time
@@ -127,17 +127,12 @@ public class Timer extends Actor
 
         if (!finishedRound1) { //on Round 1
             if (onInitPhase1 && totalSecondsElapsed > initialPhaseTime1 && !timeReset) { //after enough seconds have passed
-                //solution to the problem of loading a new world (shop)
-                //there should be a way to adjust the time in the shop class
-                //basically a way to adjust the onInitPhase or onCritPhase
-                //that should be within the timer class
                 onInitPhase1 = false;
                 onCritPhase1 = true;
                 this.setStartTime(System.currentTimeMillis());
                 timeReset = true;
 
                 totalSecondsElapsed = (System.currentTimeMillis() - startTime) / 1000; //need to reset total seconds elapsed
-                //before next if-statement
             }
             else if (onCritPhase1 && totalSecondsElapsed > criticalPhaseTime1) { //if the user's total time is over
                 onCritPhase1 = false;
@@ -147,17 +142,12 @@ public class Timer extends Actor
         }
         else if (!finishedRound2) { //on Round 2
             if (onInitPhase2 && totalSecondsElapsed > initialPhaseTime2 && !timeReset) { //after enough seconds have passed
-                //solution to the problem of loading a new world (shop)
-                //there should be a way to adjust the time in the shop class
-                //basically a way to adjust the onInitPhase or onCritPhase
-                //that should be within the timer class
                 onInitPhase2 = false;
                 onCritPhase2 = true;
                 this.setStartTime(System.currentTimeMillis());
                 timeReset = true;
 
                 totalSecondsElapsed = (System.currentTimeMillis() - startTime) / 1000; //need to reset total seconds elapsed
-                //before next if-statement
             }
             else if (onCritPhase2 && totalSecondsElapsed > criticalPhaseTime2) { //if the user's total time is over
                 onCritPhase2 = false;
@@ -167,17 +157,12 @@ public class Timer extends Actor
         }
         else if (!finishedRound3) { //on Round 3
             if (onInitPhase3 && totalSecondsElapsed > initialPhaseTime3 && !timeReset) { //after enough seconds have passed
-                //solution to the problem of loading a new world (shop)
-                //there should be a way to adjust the time in the shop class
-                //basically a way to adjust the onInitPhase or onCritPhase
-                //that should be within the timer class
                 onInitPhase3 = false;
                 onCritPhase3 = true;
                 this.setStartTime(System.currentTimeMillis());
                 timeReset = true;
 
                 totalSecondsElapsed = (System.currentTimeMillis() - startTime) / 1000; //need to reset total seconds elapsed
-                //before next if-statement
             }
             else if (onCritPhase3 && totalSecondsElapsed > criticalPhaseTime3) { //if the user's total time is over
                 onCritPhase3 = false;
