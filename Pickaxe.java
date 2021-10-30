@@ -37,13 +37,10 @@ public class Pickaxe extends Simple
     private int iterations = 0;
     
     //the lower the efficiency value, the more effective it is
-    //like a ranking system
     //since the rgb values are all even numbers, min difference is 2
     //so these efficiency values need to divide 2 evenly (so that 2 / efficiency is a finite decimal)
-    //possible values: 1, 2, 4, 8, 16, 20, 25, 32, 40, 50, etc (25 was old one)
+    //possible values: 1, 2, 4, 8, 16, 20, 25, 32, 40, 50
     private double efficiency = 25;
-    //private double efficiency = 0.04;
-    //private double efficiencyRate = 1 / pickaxeEfficiency;
     private boolean hasSpawnedCrop = false;
     public boolean tileSaysVisible = false;
 
@@ -55,15 +52,12 @@ public class Pickaxe extends Simple
 
     public void act() 
     {
-        //getWorld().showText("" + tileSaysVisible, 200, 217);
         if (this.getImage().getTransparency() == 255) {
             isVisible = true;
         }    
         else {
             isVisible = false;
         }
-        //farmingTile();
-        //getWorld().showText((int)pickaxeHitDuration + "", 300, 217);
     }    
 
     public void farmingTile() {
@@ -71,11 +65,6 @@ public class Pickaxe extends Simple
 
         if (touchedTile != null && this.isVisible) { //the tool must be equipped for it to count
             isTouching = true;
-
-            //getWorld().showText((int)(rVal * 10) / 10.00 + ": r", 100, 217);
-            //getWorld().showText((int)(gVal * 10) / 10.00 + ": g", 200, 217);
-            //getWorld().showText((int)(bVal * 10) / 10.00 + ": b", 300, 217);
-            //getWorld().showText(i + ": i", 400, 217);
             
             i = touchedTile.getI();
             rVal = touchedTile.getR();
@@ -87,11 +76,7 @@ public class Pickaxe extends Simple
         }    
 
         if (isTouching) {
-            //pickaxeHitDuration += efficiencyRate;
             if (i < r.length - 1) {
-                //rDif = (r[i + 1] - r[i]) / efficiencyRate;
-                //gDif = (g[i + 1] - g[i]) / efficiencyRate;
-                //bDif = (b[i + 1] - b[i]) / efficiencyRate;
                 
                 rVal += rDif;
                 gVal += gDif;
@@ -101,9 +86,7 @@ public class Pickaxe extends Simple
 
                 if (Math.round(rVal) == r[i+1] && Math.round(gVal) == g[i+1] && Math.round(bVal) == b[i+1]) {
                     touchedTile.incrementI();
-                    //pickaxeHitDuration = 0;
                 }
-                //iterations++;
             }
             
             touchedTile.getImage().setColor(new Color((int)Math.round(rVal), (int)Math.round(gVal), (int)Math.round(bVal)));
